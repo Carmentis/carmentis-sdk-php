@@ -2,6 +2,8 @@
 
 namespace Carmentis\Operator;
 
+use Carmentis\Operator\Exceptions\OperatorResponseException;
+use Carmentis\Operator\OperatorResponse;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -9,7 +11,7 @@ use GuzzleHttp\Exception\GuzzleException;
  * Class Client
  * @package Carmentis
  */
-class CarmentisOperatorClient
+class OperatorClient
 {
     protected string $operatorUrl;
 
@@ -33,28 +35,12 @@ class CarmentisOperatorClient
     }
 
     /**
-     * @return string
+     * @throws OperatorResponseException
      */
-    public function getOperatorUrl()
+    public function sendRequest(OperatorRequest $request): OperatorResponse
     {
-        return $this->operatorUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAppName()
-    {
-        return $this->appName;
-    }
-
-
-    /**
-     * @throws ResponseException
-     */
-    public function sendRequest(CarmentisOperatorRequest $request) {
         try {
-            return new CarmentisResponse(
+            return new OperatorResponse(
                 $this->guzzle->request(
                     'POST',
                     $this->operatorUrl,
@@ -62,7 +48,7 @@ class CarmentisOperatorClient
                 )->getBody()->getContents()
             );
         } catch (GuzzleException $e) {
-            throw new ResponseException($e->getMessage());
+            throw new OperatorResponseException($e->getMessage());
         }
     }
 }

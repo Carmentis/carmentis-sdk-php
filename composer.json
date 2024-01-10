@@ -1,0 +1,15 @@
+{
+    "name": "carmentis-sdk-php",
+    "type": "library",
+    "version": "dev-master",
+    "autoload": {
+        "psr-4": {
+            "Carmentis\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4|>=8.0",
+        "guzzlehttp/guzzle": "^7.0"
+    }
+}

@@ -2,8 +2,11 @@
 
 namespace Carmentis\Operator;
 
-class CarmentisOperatorRequest
+use Carmentis\Operator\Exceptions\OperatorRequestException;
+
+class OperatorRequest
 {
+    const METHOD_GET_OPERATOR_VERSION = "getOperatorVersion";
     const METHOD_SAVE_RECORD = "saveRecord";
     const METHOD_PREPARE_USER_APPROVAL = "prepareUserApproval";
     const METHOD_GET_APPROVAL_DATA = "getApprovalData";
@@ -14,9 +17,13 @@ class CarmentisOperatorRequest
 
     protected array $data;
 
+    /**
+     * @throws OperatorRequestException
+     */
     public function __construct(string $method, array $data)
     {
         switch ($method) {
+            case self::METHOD_GET_OPERATOR_VERSION:
             case self::METHOD_SAVE_RECORD:
             case self::METHOD_PREPARE_USER_APPROVAL:
             case self::METHOD_GET_APPROVAL_DATA:
@@ -24,7 +31,7 @@ class CarmentisOperatorRequest
             case self::METHOD_CONFIRM_RECORD:
                 break;
             default:
-                throw new RequestException("Invalid method");
+                throw new OperatorRequestException("Invalid method");
         }
         $this->method = $method;
         $this->data = $data;

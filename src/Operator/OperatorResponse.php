@@ -1,6 +1,6 @@
 <?php
 
-namespace Carmentis;
+namespace Carmentis\Operator;
 
 use Carmentis\Operator\Exceptions\OperatorResponseException;
 
@@ -8,15 +8,15 @@ use Carmentis\Operator\Exceptions\OperatorResponseException;
  * Class CarmentisOperatorResponse
  * @package Carmentis
  */
-class CarmentisOperatorResponse
+class OperatorResponse
 {
     protected $data;
 
     /**
-     * @param $response
+     * @param string $response
      * @throws OperatorResponseException
      */
-    public function __construct($response)
+    public function __construct(string $response)
     {
         $response = is_string($response) ? json_decode($response) : $response;
 

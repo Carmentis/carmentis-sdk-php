@@ -2,7 +2,7 @@
 
 namespace Carmentis\Operator\Exceptions;
 
-class CarmentisOperatorException extends \Exception
+class OperatorException extends \Exception
 {
 
 }

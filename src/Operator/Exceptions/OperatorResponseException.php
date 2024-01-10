@@ -2,6 +2,6 @@
 
 namespace Carmentis\Operator\Exceptions;
 
-class CarmentisResponseOperatorException extends CarmentisOperatorException
+class OperatorResponseException extends OperatorException
 {
 }
