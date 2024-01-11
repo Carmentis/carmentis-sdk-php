@@ -26,4 +26,8 @@ class OperatorResponse
             $this->data = $response->data;
         }
     }
+
+    public function getData() {
+        return $this->data;
+    }
 }

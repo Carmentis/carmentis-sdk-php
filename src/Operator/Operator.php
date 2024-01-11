@@ -11,6 +11,10 @@ class Operator
 
     public function __construct(string $operatorUrl)
     {
+        $this->setOperatorUrl($operatorUrl);
+    }
+
+    public function setOperatorUrl(string $operatorUrl) {
         $this->operatorClient = new OperatorClient($operatorUrl);
     }
 
@@ -28,6 +32,6 @@ class Operator
     public function getVersion(){
         return $this->operatorClient->sendRequest(
             new OperatorRequest('getOperatorVersion', [])
-        );
+        )->getData();
     }
 }
