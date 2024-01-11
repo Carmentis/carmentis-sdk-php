@@ -1,5 +1,5 @@
 {
-    "name": "carmentis-sdk-php",
+    "name": "carmentis/carmentis-sdk-php",
     "type": "library",
     "version": "dev-master",
     "autoload": {
