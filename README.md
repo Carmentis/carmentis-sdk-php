@@ -10,8 +10,16 @@ To install the SDK first add the below to your `composer.json` file:
 {
     "repositories": [
         {
-            "type": "github",
-            "url": "<UNSET>.git"
+            "type": "package",
+            "package": {
+                "name": "carmentis/carmentis-sdk-php",
+                "source": {
+                    "url": "https://github.com/Carmentis/carmentis-sdk-php.git",
+                    "type": "git",
+                    "reference": "main"
+                },
+                "version": "v0.0.1"
+            }
         }
     ],
     "require": {
