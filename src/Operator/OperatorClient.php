@@ -3,7 +3,6 @@
 namespace Carmentis\Operator;
 
 use Carmentis\Operator\Exceptions\OperatorResponseException;
-use Carmentis\Operator\OperatorResponse;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -41,11 +40,9 @@ class OperatorClient
     {
         try {
             return new OperatorResponse(
-                $this->guzzle->request(
-                    'POST',
-                    $this->operatorUrl,
-                    $request->toArray()
-                )->getBody()->getContents()
+                $this->guzzle->request('POST','/', [
+                    'json' => $request->toArray()
+                ])->getBody()->getContents()
             );
         } catch (GuzzleException $e) {
             throw new OperatorResponseException($e->getMessage());
