@@ -15,12 +15,14 @@ class OperatorRequest
 
     protected string $method;
 
-    protected array $data;
+    protected $data;
 
     /**
      * @throws OperatorRequestException
+     * @param string $method
+     * @param mixed $data
      */
-    public function __construct(string $method, array $data)
+    public function __construct(string $method, $data)
     {
         switch ($method) {
             case self::METHOD_GET_OPERATOR_VERSION:
@@ -34,14 +36,14 @@ class OperatorRequest
                 throw new OperatorRequestException("Invalid method");
         }
         $this->method = $method;
-        $this->data = $data;
+        $this->data = json_decode(json_encode($data), true);
     }
 
     public function toArray(): array
     {
         return [
             'method' => $this->method,
-            'data' => json_decode(json_encode($this->data), true)
+            'data' => $this->data,
         ];
     }
 }
