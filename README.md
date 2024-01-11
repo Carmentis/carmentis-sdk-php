@@ -24,6 +24,11 @@ To install the SDK first add the below to your `composer.json` file:
     ],
     "require": {
         "carmentis-sdk-php": "*"
+    },
+    "autoload": {
+      "psr-4": {
+        "Carmentis\\": "vendor/carmentis/carmentis-sdk-php/src"
+      }
     }
 }
 ```
@@ -40,7 +45,7 @@ composer update
 use Carmentis\Operator\Operator;
 
 try {
-    $operator = new Operator(config('carmentis.operator_url'));
+    $operator = new Operator("http://localhost:3005");
 
     $version = $operator->getVersion();
 } catch (\Exception $e) {
