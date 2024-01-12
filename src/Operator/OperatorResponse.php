@@ -10,7 +10,7 @@ use Carmentis\Operator\Exceptions\OperatorResponseException;
  */
 class OperatorResponse
 {
-    protected $data;
+    protected $data = [];
 
     /**
      * @param string $response
@@ -21,9 +21,11 @@ class OperatorResponse
         $response = is_string($response) ? json_decode($response) : $response;
 
         if(!isset($response->success) || $response->success === false) {
-            throw new OperatorResponseException($response->error);
+            throw new OperatorResponseException($response->error ?? 'Unknown error');
         }else{
-            $this->data = $response->data;
+            if(isset($response->data)){
+                $this->data = $response->data;
+            }
         }
     }
 
