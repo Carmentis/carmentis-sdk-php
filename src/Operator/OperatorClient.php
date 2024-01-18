@@ -40,7 +40,7 @@ class OperatorClient
     {
         try {
             return new OperatorResponse(
-                $this->guzzle->request('POST','/', [
+                $this->guzzle->request('POST','/' . $request->getMethod(), [
                     'json' => $request->toArray()
                 ])->getBody()->getContents()
             );

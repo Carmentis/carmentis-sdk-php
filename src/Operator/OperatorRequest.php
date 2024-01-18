@@ -46,4 +46,9 @@ class OperatorRequest
             'data' => $this->data,
         ];
     }
+
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
 }
