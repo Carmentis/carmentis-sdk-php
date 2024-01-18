@@ -41,7 +41,7 @@ class OperatorClient
         try {
             return new OperatorResponse(
                 $this->guzzle->request('POST','/' . $request->getMethod(), [
-                    'json' => $request->toArray()
+                    'json' => $request->getData()
                 ])->getBody()->getContents()
             );
         } catch (GuzzleException $e) {

@@ -51,4 +51,9 @@ class OperatorRequest
     {
         return $this->method;
     }
+
+    public function getData()
+    {
+        return $this->data;
+    }
 }

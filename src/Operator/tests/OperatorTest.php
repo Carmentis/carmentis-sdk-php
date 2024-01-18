@@ -2,6 +2,8 @@
 
 namespace Carmentis\Operator\tests;
 
+use Carmentis\Operator\Exceptions\OperatorRequestException;
+use Carmentis\Operator\Exceptions\OperatorResponseException;
 use PHPUnit\Framework\TestCase;
 use Carmentis\Operator\Operator;
 
@@ -16,6 +18,10 @@ class OperatorTest extends TestCase
         $this->operator = new Operator('http://localhost:3005');
     }
 
+    /**
+     * @throws OperatorRequestException
+     * @throws OperatorResponseException
+     */
     public function testGetVersion()
     {
         $version = $this->operator->getVersion();
