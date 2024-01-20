@@ -30,7 +30,7 @@ class Operator
      * @throws OperatorRequestException
      * @throws OperatorResponseException
      */
-    public function getVersion(): OperatorResponse
+    public function getOperatorVersion(): OperatorResponse
     {
         return $this->operatorClient->sendRequest(
             new OperatorRequest('getOperatorVersion', [])

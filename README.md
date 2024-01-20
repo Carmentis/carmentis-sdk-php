@@ -47,7 +47,7 @@ use Carmentis\Operator\Operator;
 try {
     $operator = new Operator("http://localhost:3005");
 
-    $version = $operator->getVersion();
+    $version = $operator->getOperatorVersion();
 } catch (\Exception $e) {
     // handle exception
 }

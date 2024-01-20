@@ -24,7 +24,7 @@ class OperatorTest extends TestCase
      */
     public function testGetVersion()
     {
-        $version = $this->operator->getVersion();
+        $version = $this->operator->getOperatorVersion();
         $this->assertEquals('0.0.2', $version->getData(), "Version is not 0.0.2");
     }
 
