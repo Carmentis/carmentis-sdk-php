@@ -21,7 +21,7 @@ class OperatorResponse
         $response = is_string($response) ? json_decode($response) : $response;
 
         if(!isset($response->success) || $response->success === false) {
-            throw new OperatorResponseException($response->error ?? 'Unknown error');
+            throw new OperatorResponseException($response->error ?? 'Invalid response');
         }else{
             if(isset($response->data)){
                 $this->data = $response->data;
