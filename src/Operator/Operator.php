@@ -77,13 +77,15 @@ class Operator
     }
 
     /**
+     * @param array|object $data
+     * @param string[] $accessRules
+     * @return OperatorResponse
      * @throws OperatorRequestException
      * @throws OperatorResponseException
-     * @param array|object $data
-     * @return OperatorResponse
      */
-    public function getRecordData($data): OperatorResponse
+    public function getRecordData($data, array $accessRules=['*']): OperatorResponse
     {
+        $data['accessRules'] = implode(',', $accessRules);
         return $this->operatorClient->sendRequest(
             new OperatorRequest('getRecordData', $data)
         );
