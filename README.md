@@ -18,7 +18,7 @@ To install the SDK first add the below to your `composer.json` file:
                     "type": "git",
                     "reference": "main"
                 },
-                "version": "v0.0.1"
+                "version": "v1.0.0"
             }
         }
     ],
