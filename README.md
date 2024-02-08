@@ -52,3 +52,5 @@ try {
     // handle exception
 }
 ```
+
+Documentation for the methods to call can be found on [the official Carmentis documentation](https://docs.carmentis.io/)
