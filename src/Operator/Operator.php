@@ -57,20 +57,24 @@ class Operator
     }
 
     /**
-     * @param string $application
-     * @param array $field
-     * @param string $redirectUrl
+     * @param string $application application name
+     * @param string $approvingEmailFieldName field name having the email of the user who will approve the record as value
+     * @param string $messageName name of the predefined message to send to the user who will approve the record
+     * @param array $field values of your record, using the predefined fields structure of your application
+     * @param string $redirectUrl URL to redirect the user after the approval
      * @return OperatorResponse
      * @throws OperatorRequestException
      * @throws OperatorResponseException
      */
-    public function prepareUserApproval(string $application, array $field, string $redirectUrl): OperatorResponse
+    public function prepareUserApproval(string $application, string $approvingEmailFieldName, string $messageName, array $field, string $redirectUrl): OperatorResponse
     {
         return $this->operatorClient->sendRequest(
             new OperatorRequest('prepareUserApproval', [
                 'application' => $application,
                 'field' => $field,
-                'redirectUrl' => $redirectUrl
+                'message' => $messageName,
+                'email' => $approvingEmailFieldName,
+                'redirect' => $redirectUrl,
             ])
         );
     }
