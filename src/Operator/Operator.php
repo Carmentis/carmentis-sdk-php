@@ -88,7 +88,9 @@ class Operator
     public function getApprovalData(string $merkleHash): OperatorResponse
     {
         return $this->operatorClient->sendRequest(
-            new OperatorRequest('getApprovalData', $merkleHash)
+            new OperatorRequest('getApprovalData', [
+                'merkleHash' => $merkleHash
+            ])
         );
     }
 
