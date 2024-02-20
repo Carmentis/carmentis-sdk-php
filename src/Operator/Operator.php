@@ -66,11 +66,12 @@ class Operator
      * @throws OperatorRequestException
      * @throws OperatorResponseException
      */
-    public function prepareUserApproval(string $application, string $approvingEmailFieldName, string $messageName, array $field, string $redirectUrl): OperatorResponse
+    public function prepareUserApproval(string $application, string $approvingEmailFieldName, string $messageName, array $field, string $redirectUrl, $flowId=null): OperatorResponse
     {
         return $this->operatorClient->sendRequest(
             new OperatorRequest('prepareUserApproval', [
                 'application' => $application,
+                'flowId' => $flowId,
                 'field' => $field,
                 'message' => $messageName,
                 'email' => $approvingEmailFieldName,
