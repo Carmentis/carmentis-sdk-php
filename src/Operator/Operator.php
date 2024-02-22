@@ -71,7 +71,7 @@ class Operator
         return $this->operatorClient->sendRequest(
             new OperatorRequest('prepareUserApproval', [
                 'application' => $application,
-                //'flowId' => $flowId,
+                'flowId' => $flowId,
                 'field' => $field,
                 'message' => $messageName,
                 'email' => $approvingEmailFieldName,
