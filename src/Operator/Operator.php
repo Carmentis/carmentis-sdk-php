@@ -71,20 +71,6 @@ class Operator
      */
     public function prepareUserApproval(string $application, $authMethod, $authId, string $messageName, array $field, string $successUrl, string $cancelUrl, $flowId=null): OperatorResponse
     {
-        var_dump(new OperatorRequest('prepareUserApproval', [
-            'application' => $application,
-            'flowId' => $flowId,
-            'field' => $field,
-            'message' => $messageName,
-            'authentication' => [
-                'method' => $authMethod,
-                'id' => $authId
-            ],
-            'redirect' => [
-                'success' => $successUrl,
-                'cancel' => $cancelUrl
-            ],
-        ]));die;
         return $this->operatorClient->sendRequest(
             new OperatorRequest('prepareUserApproval', [
                 'application' => $application,
@@ -97,7 +83,7 @@ class Operator
                 ],
                 'redirect' => [
                     'success' => $successUrl,
-                    'cancel' => $cancelUrl
+                     'cancel' => $cancelUrl
                 ],
             ])
         );
