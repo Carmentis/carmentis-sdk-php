@@ -26,7 +26,7 @@ class OperatorTest extends TestCase
     public function testGetVersion()
     {
         $version = $this->operator->getOperatorVersion();
-        $this->assertEquals('0.0.2', $version->getData(), "Version is not 0.0.2");
+        $this->assertEquals('0.0.3', $version->getData(), "Version is not 0.0.3");
     }
 
     /**
@@ -35,10 +35,17 @@ class OperatorTest extends TestCase
      */
     public function testPrepareUserApproval()
     {
-        $operatorResponse = $this->operator->prepareUserApproval('test.test', 'email', 'signMessage', [
-            'email' => 'test@test.com',
-            'message' => 'test message'
-        ], 'http://anyway.bye');
+        $operatorResponse = $this->operator->prepareUserApproval(
+            'test.test',
+            'email',
+            'test@test.com',
+            'signMessage',
+            [
+                'message' => 'test message'
+            ],
+        'https://anyway.bye',
+        'https://anyway.bye'
+        );
 
         $this->assertObjectHasProperty('url', $operatorResponse->getData(), "Response does not contain url");
         $this->assertObjectHasProperty('merkleHash', $operatorResponse->getData(), "Response does not contain merkleHash");

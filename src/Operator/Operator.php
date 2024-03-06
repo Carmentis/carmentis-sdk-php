@@ -58,24 +58,47 @@ class Operator
 
     /**
      * @param string $application application name
-     * @param string $approvingEmailFieldName field name having the email of the user who will approve the record as value
+     * @param $authMethod
+     * @param $authId
      * @param string $messageName name of the predefined message to send to the user who will approve the record
      * @param array $field values of your record, using the predefined fields structure of your application
-     * @param string $redirectUrl URL to redirect the user after the approval
+     * @param string $successUrl
+     * @param string $cancelUrl
+     * @param null $flowId
      * @return OperatorResponse
      * @throws OperatorRequestException
      * @throws OperatorResponseException
      */
-    public function prepareUserApproval(string $application, string $approvingEmailFieldName, string $messageName, array $field, string $redirectUrl, $flowId=null): OperatorResponse
+    public function prepareUserApproval(string $application, $authMethod, $authId, string $messageName, array $field, string $successUrl, string $cancelUrl, $flowId=null): OperatorResponse
     {
+        var_dump(new OperatorRequest('prepareUserApproval', [
+            'application' => $application,
+            'flowId' => $flowId,
+            'field' => $field,
+            'message' => $messageName,
+            'authentication' => [
+                'method' => $authMethod,
+                'id' => $authId
+            ],
+            'redirect' => [
+                'success' => $successUrl,
+                'cancel' => $cancelUrl
+            ],
+        ]));die;
         return $this->operatorClient->sendRequest(
             new OperatorRequest('prepareUserApproval', [
                 'application' => $application,
                 'flowId' => $flowId,
                 'field' => $field,
                 'message' => $messageName,
-                'email' => $approvingEmailFieldName,
-                'redirect' => $redirectUrl,
+                'authentication' => [
+                    'method' => $authMethod,
+                    'id' => $authId
+                ],
+                'redirect' => [
+                    'success' => $successUrl,
+                    'cancel' => $cancelUrl
+                ],
             ])
         );
     }
