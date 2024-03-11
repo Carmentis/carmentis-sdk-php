@@ -12,6 +12,7 @@ class OperatorRequest
     const METHOD_GET_APPROVAL_DATA = "getApprovalData";
     const METHOD_GET_RECORD_DATA = "getRecordData";
     const METHOD_CONFIRM_RECORD = "confirmRecord";
+    const METHOD_GET_RECORD_INFORMATION = "getRecordInformation";
 
     protected string $method;
 
@@ -31,6 +32,7 @@ class OperatorRequest
             case self::METHOD_GET_APPROVAL_DATA:
             case self::METHOD_GET_RECORD_DATA:
             case self::METHOD_CONFIRM_RECORD:
+            case self::METHOD_GET_RECORD_INFORMATION:
                 break;
             default:
                 throw new OperatorRequestException("Invalid method");

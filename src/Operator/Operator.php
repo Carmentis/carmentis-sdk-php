@@ -130,6 +130,19 @@ class Operator
     }
 
     /**
+     * @throws OperatorRequestException
+     * @throws OperatorResponseException
+     */
+    public function getRecordInformation(string $merkleHash): OperatorResponse
+    {
+        return $this->operatorClient->sendRequest(
+            new OperatorRequest(OperatorRequest::METHOD_GET_RECORD_INFORMATION, [
+                'merkleHash' => $merkleHash,
+            ])
+        );
+    }
+
+    /**
      * @param string $merkleHash
      * @return OperatorResponse
      * @throws OperatorRequestException
