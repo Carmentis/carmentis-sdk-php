@@ -73,7 +73,7 @@ class Operator
     {
 
         if (is_array($authentication)) {
-            $authentication = new Authentication($authentication['method'], $authentication['identifier']);
+            $authentication = new Authentication($authentication['method'], $authentication['id'] || $authentication['identifier']);
         }
         if (is_array($redirect)) {
             $redirect = new Redirect($redirect['success'], $redirect['cancel']);
