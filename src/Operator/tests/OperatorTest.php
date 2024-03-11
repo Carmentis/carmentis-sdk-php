@@ -2,6 +2,8 @@
 
 namespace Carmentis\Operator\tests;
 
+use Carmentis\Operator\Arguments\Authentication;
+use Carmentis\Operator\Arguments\Redirect;
 use Carmentis\Operator\Exceptions\OperatorException;
 use Carmentis\Operator\Exceptions\OperatorRequestException;
 use Carmentis\Operator\Exceptions\OperatorResponseException;
@@ -37,14 +39,12 @@ class OperatorTest extends TestCase
     {
         $operatorResponse = $this->operator->prepareUserApproval(
             'test.test',
-            'email',
-            'test@test.com',
+            new Authentication('email', 'test@test.com'),
             'signMessage',
             [
                 'message' => 'test message'
             ],
-        'https://anyway.bye',
-        'https://anyway.bye'
+            new Redirect('https://anyway.bye', 'https://anyway.bye'),
         );
 
         $this->assertObjectHasProperty('url', $operatorResponse->getData(), "Response does not contain url");

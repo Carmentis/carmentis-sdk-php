@@ -2,6 +2,8 @@
 
 namespace Carmentis\Operator;
 
+use Carmentis\Operator\Arguments\Authentication;
+use Carmentis\Operator\Arguments\Redirect;
 use Carmentis\Operator\Exceptions\OperatorRequestException;
 use Carmentis\Operator\Exceptions\OperatorResponseException;
 
@@ -58,19 +60,25 @@ class Operator
 
     /**
      * @param string $application application name
-     * @param $authMethod
-     * @param $authId
+     * @param array|Authentication $authentication
      * @param string $messageName name of the predefined message to send to the user who will approve the record
      * @param array $field values of your record, using the predefined fields structure of your application
-     * @param string $successUrl
-     * @param string $cancelUrl
+     * @param array|Redirect $redirect
      * @param null $flowId
      * @return OperatorResponse
      * @throws OperatorRequestException
      * @throws OperatorResponseException
      */
-    public function prepareUserApproval(string $application, $authMethod, $authId, string $messageName, array $field, string $successUrl, string $cancelUrl, $flowId=null): OperatorResponse
+    public function prepareUserApproval(string $application, $authentication, string $messageName, array $field, $redirect, $flowId=null): OperatorResponse
     {
+
+        if (is_array($authentication)) {
+            $authentication = new Authentication($authentication['method'], $authentication['identifier']);
+        }
+        if (is_array($redirect)) {
+            $redirect = new Redirect($redirect['success'], $redirect['cancel']);
+        }
+
         return $this->operatorClient->sendRequest(
             new OperatorRequest('prepareUserApproval', [
                 'application' => $application,
@@ -78,12 +86,12 @@ class Operator
                 'field' => $field,
                 'message' => $messageName,
                 'authentication' => [
-                    'method' => $authMethod,
-                    'id' => $authId
+                    'method' => $authentication->method,
+                    'id' => $authentication->identifier
                 ],
                 'redirect' => [
-                    'success' => $successUrl,
-                     'cancel' => $cancelUrl
+                    'success' => $redirect->success,
+                    'cancel' => $redirect->cancel
                 ],
             ])
         );
