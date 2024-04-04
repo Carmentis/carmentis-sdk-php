@@ -28,7 +28,7 @@ class OperatorTest extends TestCase
     public function testGetVersion()
     {
         $version = $this->operator->getOperatorVersion();
-        $this->assertEquals('0.0.3', $version->getData(), "Version is not 0.0.3");
+        $this->assertEquals('0.0.4', $version->getData(), "Version is not 0.0.4");
     }
 
     /**
@@ -39,16 +39,41 @@ class OperatorTest extends TestCase
     {
         $operatorResponse = $this->operator->prepareUserApproval(
             'test.test',
-            new Authentication('email', 'test@test.com'),
-            'signMessage',
             [
-                'message' => 'test message'
+                'message' => 'test',
+                'email' => 'test@test.us'
             ],
-            new Redirect('https://anyway.bye', 'https://anyway.bye'),
+            [
+                'main' => ['*']
+            ],
+            [
+                'user' => 'signer',
+                'message' => 'signMessage',
+            ],
+            [
+                [
+                    'name' => 'signer',
+                    'authentication' => [
+                        'method' => 'email',
+                        'value' => 'selim@tavux.tech'
+                    ]
+                ]
+            ],
+            [
+                'main'
+            ],
+            [
+                'signer' => ['main']
+            ],
+            null,
+            [
+                'success' => 'http://localhost',
+                'error' => 'http://localhost/error'
+            ]
         );
 
         $this->assertObjectHasProperty('url', $operatorResponse->getData(), "Response does not contain url");
-        $this->assertObjectHasProperty('merkleHash', $operatorResponse->getData(), "Response does not contain merkleHash");
+        $this->assertObjectHasProperty('recordId', $operatorResponse->getData(), "Response does not contain recordId");
     }
 
     protected function tearDown(): void

@@ -59,43 +59,59 @@ class Operator
     }
 
     /**
-     * @param string $application application name
-     * @param array|Authentication $authentication
-     * @param string $messageName name of the predefined message to send to the user who will approve the record
-     * @param array $field values of your record, using the predefined fields structure of your application
-     * @param array|Redirect $redirect
-     * @param null $flowId
+     * Prepares user approval with the new parameters structure.
+     *
+     * @param string $application Application name - no longer used directly, but might influence logic elsewhere.
+     * @param array $fields Values of your record, using the predefined fields structure of your application.
+     * @param array $permissions
+     * @param array $approval
+     * @param array $users
+     * @param array $channels
+     * @param array $subscriptions
+     * @param null|string $flowId Optional flow identifier.
+     * @param array $redirect
      * @return OperatorResponse
      * @throws OperatorRequestException
      * @throws OperatorResponseException
      */
-    public function prepareUserApproval(string $application, $authentication, string $messageName, array $field, $redirect, $flowId=null): OperatorResponse
+    public function prepareUserApproval(
+        string $application,
+        array $fields,
+        array $permissions,
+        array $approval,
+        array $users=[],
+        array $channels=[],
+        array $subscriptions=[],
+        string $flowId=null,
+        $redirect=[]
+    ): OperatorResponse
     {
+        $requestBody = [];
 
-        if (is_array($authentication)) {
-            $authentication = new Authentication($authentication['method'], $authentication['identifier']);
-        }
-        if (is_array($redirect)) {
-            $redirect = new Redirect($redirect['success'], $redirect['cancel']);
+        $requestBody["application"] = $application;
+        $requestBody["users"] = $users;
+
+        $requestBody["fields"] = $fields;
+        $requestBody["channels"] = $channels;
+
+        $requestBody["subscriptions"] = $subscriptions;
+
+        $requestBody["redirect"] = $redirect;
+
+        $requestBody["permissions"] = $permissions;
+
+        $requestBody["approval"] = $approval;
+
+        if ($flowId !== null) {
+            $requestBody["flowId"] = $flowId;
         }
 
         return $this->operatorClient->sendRequest(
-            new OperatorRequest('prepareUserApproval', [
-                'application' => $application,
-                'flowId' => $flowId,
-                'field' => $field,
-                'message' => $messageName,
-                'authentication' => [
-                    'method' => $authentication->method,
-                    'id' => $authentication->identifier
-                ],
-                'redirect' => [
-                    'success' => $redirect->success,
-                    'cancel' => $redirect->cancel
-                ],
-            ])
+            new OperatorRequest('prepareUserApproval', $requestBody)
         );
     }
+
+
 
     /**
      * @param string $merkleHash

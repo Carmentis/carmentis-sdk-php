@@ -6,10 +6,11 @@ namespace Carmentis\Operator\Arguments;
  * Class Authentication
  * @package Carmentis\Operator\Arguments
  *
- * @property-read string method
- * @property-read string identifier
+ * @property-read string $method
+ * @property-read string $value
  *
  * This class is used to authenticate the user. For now, we only support the 'email' method.
+ * @deprecated WILL BE REMOVED IN THE NEXT MAJOR RELEASE
  */
 class Authentication extends OperatorArgument
 {
@@ -25,16 +26,16 @@ class Authentication extends OperatorArgument
      *
      * The identifier for the authentication method (email value for now)
      */
-    protected string $identifier;
+    protected string $value;
 
     /**
      * Authentication constructor.
      * @param string $method
-     * @param string $identifier
+     * @param string $value
      */
-    public function __construct(string $method, string $identifier)
+    public function __construct(string $method, string $value)
     {
         $this->method = $method;
-        $this->identifier = $identifier;
+        $this->value = $value;
     }
 }
