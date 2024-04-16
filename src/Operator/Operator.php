@@ -61,7 +61,8 @@ class Operator
     /**
      * Prepares user approval with the new parameters structure.
      *
-     * @param string $application Application name - no longer used directly, but might influence logic elsewhere.
+     * @param string $applicationId Application id
+     * @param int $applicationVersion Application version
      * @param array $fields Values of your record, using the predefined fields structure of your application.
      * @param array $permissions
      * @param array $approval
@@ -75,7 +76,8 @@ class Operator
      * @throws OperatorResponseException
      */
     public function prepareUserApproval(
-        string $application,
+        string $applicationId,
+        int $applicationVersion,
         array $fields,
         array $permissions,
         array $approval,
@@ -88,7 +90,8 @@ class Operator
     {
         $requestBody = [];
 
-        $requestBody["application"] = $application;
+        $requestBody["application"] = $applicationId;
+        $requestBody["version"] = $applicationVersion;
         $requestBody["users"] = $users;
 
         $requestBody["fields"] = $fields;
