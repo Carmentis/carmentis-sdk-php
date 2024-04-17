@@ -38,7 +38,8 @@ class OperatorTest extends TestCase
     public function testPrepareUserApproval()
     {
         $operatorResponse = $this->operator->prepareUserApproval(
-            'test.test',
+            'FA2DFE083495DCA999559E9A183809FB5E6F4A8F3CADB6F3EE5D91BDE03D84A9',
+            1,
             [
                 'message' => 'test',
                 'email' => 'test@test.us'
